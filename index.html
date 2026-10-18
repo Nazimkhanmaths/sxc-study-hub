@@ -70,6 +70,9 @@
         <!-- Email & Password -->
         <input type="email" id="email" placeholder="Email address" class="w-full mb-3 p-2 border rounded text-slate-800">
         <input type="password" id="password" placeholder="Password" class="w-full mb-4 p-2 border rounded text-slate-800">
+
+        <div class="text-right mb-4"><button id="forgot-btn" class="text-xs text-blue-600 hover:underline">Forgot Password?</button></div>
+
         <div class="flex gap-2 mb-4">
             <button id="login-btn" class="w-1/2 bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700">Log In</button>
             <button id="signup-btn" class="w-1/2 bg-gray-200 text-gray-800 font-bold py-2 rounded hover:bg-gray-300">Sign Up</button>
@@ -251,9 +254,9 @@
     <!-- ========================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
+       import { 
             getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
-            GoogleAuthProvider, signInWithPopup
+            GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, getDocs, addDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -337,6 +340,21 @@
         document.getElementById('google-btn').addEventListener('click', () => {
             const provider = new GoogleAuthProvider();
             signInWithPopup(auth, provider).catch(error => showError(error.message));
+        });
+
+        // Forgot Password Logic
+        document.getElementById('forgot-btn').addEventListener('click', () => {
+            const emailValue = document.getElementById('email').value;
+            if (!emailValue) {
+                showError("Please enter your email address first.");
+                return;
+            }
+            sendPasswordResetEmail(auth, emailValue)
+                .then(() => {
+                    window.showToast("Password reset email sent!");
+                    errorText.classList.add('hidden');
+                })
+                .catch(error => showError(error.message));
         });
 
         // 2. Database & UI Logic (Wrapped in functions)
