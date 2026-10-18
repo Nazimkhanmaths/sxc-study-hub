@@ -61,7 +61,7 @@
 <body class="min-h-screen flex flex-col items-center justify-center antialiased">
 
     <!-- ========================================== -->
-    <!-- 1. THE LOGIN SCREEN (Google, Phone, Email) -->
+    <!-- 1. THE LOGIN SCREEN (Google & Email)       -->
     <!-- ========================================== -->
     <div id="auth-container" class="bg-white p-8 rounded-lg shadow-md w-96 text-center mt-10">
         <h2 class="text-2xl font-bold mb-2 text-gray-800">SXC Study Hub</h2>
@@ -86,20 +86,6 @@
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
             Sign in with Google
         </button>
-
-        <!-- Phone Sign-In -->
-        <div id="phone-section" class="bg-gray-50 p-3 rounded border">
-            <input type="tel" id="phone-number" placeholder="+91 9876543210" class="w-full mb-3 p-2 border rounded text-slate-800">
-            <button id="send-otp-btn" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700">Send OTP</button>
-            <div id="recaptcha-container" class="mt-2 flex justify-center"></div>
-        </div>
-
-        <!-- OTP Verification (Hidden initially) -->
-        <div id="otp-section" class="bg-gray-50 p-3 rounded border hidden">
-            <p class="text-sm text-gray-700 mb-2">Enter the 6-digit code sent to your phone</p>
-            <input type="text" id="otp-code" placeholder="123456" class="w-full mb-3 p-2 border rounded text-slate-800">
-            <button id="verify-otp-btn" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700">Verify Code</button>
-        </div>
 
         <p id="error-message" class="text-red-500 text-sm mt-4 hidden"></p>
     </div>
@@ -267,7 +253,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { 
             getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
-            GoogleAuthProvider, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber
+            GoogleAuthProvider, signInWithPopup
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, getDocs, addDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -290,8 +276,6 @@
         const authContainer = document.getElementById('auth-container');
         const protectedWebsite = document.getElementById('protected-website');
         const errorText = document.getElementById('error-message');
-        const phoneSection = document.getElementById('phone-section');
-        const otpSection = document.getElementById('otp-section');
 
         const showError = (msg) => { errorText.textContent = msg; errorText.classList.remove('hidden'); };
         
@@ -325,8 +309,8 @@
                 protectedWebsite.classList.remove('hidden');
                 document.body.classList.remove('items-center', 'justify-center');
                 
-                // Display Name or Phone
-                const displayName = user.displayName || user.phoneNumber || user.email || "Student";
+                // Display Name
+                const displayName = user.displayName || user.email || "Student";
                 document.getElementById('userName').innerText = displayName;
                 
                 // Load data after successful login
@@ -353,23 +337,6 @@
         document.getElementById('google-btn').addEventListener('click', () => {
             const provider = new GoogleAuthProvider();
             signInWithPopup(auth, provider).catch(error => showError(error.message));
-        });
-
-        // Phone Login
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { 'size': 'normal' });
-        document.getElementById('send-otp-btn').addEventListener('click', () => {
-            const phoneNumber = document.getElementById('phone-number').value;
-            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-                .then((result) => {
-                    window.confirmationResult = result;
-                    phoneSection.classList.add('hidden');
-                    otpSection.classList.remove('hidden');
-                    errorText.classList.add('hidden');
-                }).catch(error => showError(error.message));
-        });
-        document.getElementById('verify-otp-btn').addEventListener('click', () => {
-            const code = document.getElementById('otp-code').value;
-            window.confirmationResult.confirm(code).catch(() => showError("Invalid OTP. Try again."));
         });
 
         // 2. Database & UI Logic (Wrapped in functions)
