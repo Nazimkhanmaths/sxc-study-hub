@@ -345,8 +345,9 @@
                 try {
                     const resSnap = await getDocs(collection(window.sxcDB, "resources"));
                     if (!resSnap.empty) {
+                        resources = []; // This line permanently stops the duplication
                         resSnap.forEach(d => {
-                            if (!resources.find(lr => lr.id === d.id)) resources.push({ id: d.id, ...d.data() });
+                            resources.push({ id: d.id, ...d.data() });
                         });
                     }
                     saveDataLocally();
