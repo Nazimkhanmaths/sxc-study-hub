@@ -1,5 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SXC Study Hub - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+
+    <!-- ========================================== -->
+    <!-- 1. THE LOGIN SCREEN (Visible when logged out) -->
+    <!-- ========================================== -->
+    <div id="auth-container" class="bg-white p-8 rounded-lg shadow-md w-96 text-center mt-10">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">SXC Study Hub</h2>
+        <p class="text-sm text-gray-600 mb-4">Please log in or create an account to access the study materials.</p>
+        
+        <input type="email" id="email" placeholder="Email address" class="w-full mb-4 p-2 border rounded">
+        <input type="password" id="password" placeholder="Password" class="w-full mb-6 p-2 border rounded">
+        
+        <button id="login-btn" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2 hover:bg-blue-700">Log In</button>
+        <button id="signup-btn" class="w-full bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded hover:bg-gray-300">Create Account</button>
+        
+        <p id="error-message" class="text-red-500 text-sm mt-4 hidden"></p>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. YOUR WEBSITE (Visible when logged in)   -->
+    <!-- ========================================== -->
+    <div id="protected-website" class="hidden w-full h-full">
+        
+        <!-- LOGOUT BUTTON (Kept at the very top for users to exit) -->
+        <div class="w-full bg-gray-800 p-2 text-right">
+            <button id="logout-btn" class="text-white bg-red-600 px-4 py-1 rounded hover:bg-red-700">Log Out</button>
+        </div>
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <!-- PASTE YOUR ENTIRE ORIGINAL WEBSITE HTML CODE BELOW THIS LINE -->
+        <!DOCTYPE html>
+<html lang="en">
 <head> 
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-08WC99F9GQ"></script>
@@ -816,6 +854,69 @@
         window.loginWithGoogleClassroom = function() { currentUser = { name: "Google Classroom Student" }; document.getElementById('authButtonsContainer').classList.add('hidden'); document.getElementById('userProfileBadge').classList.remove('hidden'); document.getElementById('userName').innerText = "Google Student"; window.showToast("Logged in via Google Classroom!"); }
         window.loginWithWhatsApp = function() { currentUser = { name: "WhatsApp Student" }; document.getElementById('authButtonsContainer').classList.add('hidden'); document.getElementById('userProfileBadge').classList.remove('hidden'); document.getElementById('userName').innerText = "WhatsApp Student"; window.showToast("Logged in via WhatsApp!"); }
         window.logoutUser = function() { currentUser = null; document.getElementById('authButtonsContainer').classList.remove('hidden'); document.getElementById('userProfileBadge').classList.add('hidden'); window.showToast("Logged out"); }
+    </script>
+</body>
+</html>
+
+
+        <!-- PASTE YOUR ENTIRE ORIGINAL WEBSITE HTML CODE ABOVE THIS LINE -->
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. FIREBASE AUTHENTICATION LOGIC           -->
+    <!-- ========================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+        // PASTE YOUR FIREBASE KEYS INSIDE THESE BRACKETS:
+        const firebaseConfig = {
+            apiKey: " apiKey: "AIzaSyDK0c-wCRI8F4sA_4kSCu8G6l67LEPpCYI",
+            authDomain: "sxc-mumbai-portal.firebaseapp.com",
+            projectId: "sxc-mumbai-portal",
+            storageBucket: "sxc-mumbai-portal.firebasestorage.app",
+            messagingSenderId: "1070155779544",
+            appId: "1:1070155779544:web:e9b55883f81689b8ee76ad"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Get UI Elements
+        const authContainer = document.getElementById('auth-container');
+        const protectedWebsite = document.getElementById('protected-website');
+        const errorText = document.getElementById('error-message');
+
+        // Toggle Login Screen vs Website Content
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                authContainer.classList.add('hidden'); // Hide login box
+                protectedWebsite.classList.remove('hidden'); // Show your website
+                document.body.classList.remove('items-center', 'justify-center'); // Fix alignment
+            } else {
+                authContainer.classList.remove('hidden'); // Show login box
+                protectedWebsite.classList.add('hidden'); // Hide your website
+                document.body.classList.add('items-center', 'justify-center'); // Center login box
+            }
+        });
+
+        // Button Actions
+        document.getElementById('signup-btn').addEventListener('click', () => {
+            createUserWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value)
+                .catch(error => { errorText.textContent = error.message; errorText.classList.remove('hidden'); });
+        });
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value)
+                .catch(error => { errorText.textContent = error.message; errorText.classList.remove('hidden'); });
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth);
+        });
     </script>
 </body>
 </html>
