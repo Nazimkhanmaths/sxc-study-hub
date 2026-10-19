@@ -9,15 +9,16 @@
       gtag('js', new Date());
       gtag('config', 'G-08WC99F9GQ');
     </script>
-      
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SXC Study Hub - Secure Access</title>
+    <title>St. Xavier's College Mumbai - Verified Study Portal</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <!-- Google Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -63,202 +64,468 @@
     <!-- ========================================== -->
     <!-- 1. THE LOGIN SCREEN (Google & Email)       -->
     <!-- ========================================== -->
-    <div id="auth-container" class="bg-white p-8 rounded-lg shadow-md w-96 text-center mt-10">
-        <h2 class="text-2xl font-bold mb-2 text-gray-800">SXC Study Hub</h2>
-        <p class="text-sm text-gray-600 mb-6">Log in to access study materials.</p>
+    <div id="auth-container" class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-xl w-96 text-center border border-slate-200 dark:border-slate-800">
+        <div class="flex justify-center mb-4">
+            <div class="w-14 h-14 bg-sxc-navy rounded-2xl flex items-center justify-center shadow border-2 border-sxc-gold">
+                <i class="fa-solid fa-graduation-cap text-white text-3xl"></i>
+            </div>
+        </div>
+        <h2 class="text-2xl font-black mb-1 text-slate-800 dark:text-slate-100">SXC Study Hub</h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Log in to access verified materials.</p>
         
         <!-- Email & Password -->
-        <input type="email" id="email" placeholder="Email address" class="w-full mb-3 p-2 border rounded text-slate-800">
-        <input type="password" id="password" placeholder="Password" class="w-full mb-4 p-2 border rounded text-slate-800">
+        <input type="email" id="email" placeholder="Email address" class="w-full mb-3 p-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-lg text-sm text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-sxc-navy">
+        <input type="password" id="password" placeholder="Password" class="w-full mb-2 p-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-lg text-sm text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-sxc-navy">
 
-        <div class="text-right mb-4"><button id="forgot-btn" class="text-xs text-blue-600 hover:underline">Forgot Password?</button></div>
+        <!-- Forgot Password Button -->
+        <div class="text-right mb-4">
+            <button id="forgot-btn" class="text-xs font-bold text-blue-600 hover:underline">Forgot Password?</button>
+        </div>
 
         <div class="flex gap-2 mb-4">
-            <button id="login-btn" class="w-1/2 bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700">Log In</button>
-            <button id="signup-btn" class="w-1/2 bg-gray-200 text-gray-800 font-bold py-2 rounded hover:bg-gray-300">Sign Up</button>
+            <button id="login-btn" class="w-1/2 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold py-2.5 rounded-lg shadow transition">Log In</button>
+            <button id="signup-btn" class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-extrabold py-2.5 rounded-lg shadow transition">Sign Up</button>
         </div>
 
         <div class="flex items-center my-4">
-            <hr class="flex-grow border-gray-300">
-            <span class="px-3 text-gray-500 text-sm">OR</span>
-            <hr class="flex-grow border-gray-300">
+            <hr class="flex-grow border-slate-200 dark:border-slate-700">
+            <span class="px-3 text-slate-400 text-xs font-bold">OR</span>
+            <hr class="flex-grow border-slate-200 dark:border-slate-700">
         </div>
 
         <!-- Google Sign-In -->
-        <button id="google-btn" class="w-full bg-red-500 text-white font-bold py-2 px-4 rounded mb-4 hover:bg-red-600 flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
-            Sign in with Google
+        <button id="google-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-extrabold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 shadow transition">
+            <i class="fa-brands fa-google text-sm"></i> Sign in with Google
         </button>
 
-        <p id="error-message" class="text-red-500 text-sm mt-4 hidden"></p>
+        <p id="error-message" class="text-red-500 font-bold text-xs mt-4 hidden"></p>
     </div>
 
     <!-- ========================================== -->
-    <!-- 2. ST. XAVIER'S WEBSITE (Hidden by default)-->
+    <!-- 2. MAIN WEBSITE (Hidden until logged in)   -->
     <!-- ========================================== -->
-    <div id="protected-website" class="hidden w-full h-full">
-        <!-- HEADER -->
-        <header class="sxc-gradient text-white shadow-xl sticky top-0 z-30 gold-border">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3.5 gap-4">
-                    
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 shadow-md border-2 border-sxc-gold flex-shrink-0">
-                            <i class="fa-solid fa-graduation-cap text-sxc-navy text-2xl"></i>
+    <div id="protected-website" class="hidden w-full h-full flex-col justify-between">
+        <div>
+            <!-- HEADER -->
+            <header class="sxc-gradient text-white shadow-xl sticky top-0 z-30 gold-border">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3.5 gap-4">
+                        
+                        <div class="flex items-center space-x-3.5">
+                            <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 shadow-md border-2 border-sxc-gold flex-shrink-0">
+                                <i class="fa-solid fa-graduation-cap text-sxc-navy text-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h1 class="text-xl font-black tracking-tight leading-none">ST. XAVIER'S COLLEGE</h1>
+                                    <span class="bg-sxc-gold text-sxc-navy text-[10px] font-black px-1.5 py-0.5 rounded uppercase">MUMBAI</span>
+                                </div>
+                                <div class="flex items-center gap-2 mt-0.5">
+                                    <p class="text-xs text-amber-200/90 font-medium tracking-wide">Verified PYQs & Student Hub</p>
+                                    <span id="dbStatusBadge" class="bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full">Connecting DB...</span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h1 class="text-xl font-black tracking-tight leading-none">ST. XAVIER'S COLLEGE</h1>
-                                <span class="bg-sxc-gold text-sxc-navy text-[10px] font-black px-1.5 py-0.5 rounded uppercase">MUMBAI</span>
+
+                        <!-- Auth Options -->
+                        <div class="flex items-center space-x-2.5 flex-wrap gap-y-2">
+                            <div id="userProfileBadge" class="flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl border border-white/20 text-xs">
+                                <img id="userAvatar" src="https://placehold.co/40x40/0F2C59/E5A93C?text=U" alt="" class="w-6 h-6 rounded-full border border-sxc-gold">
+                                <span id="userName" class="font-bold text-amber-200">Student</span>
+                                <button id="logout-btn" class="text-slate-300 hover:text-white ml-2 text-[10px] uppercase font-bold underline cursor-pointer">Logout</button>
                             </div>
-                            <div class="flex items-center gap-2 mt-0.5">
-                                <p class="text-xs text-amber-200/90 font-medium tracking-wide">Verified PYQs & Student Hub</p>
-                                <span id="dbStatusBadge" class="bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full">Connecting DB...</span>
-                            </div>
+
+                            <button onclick="toggleDarkMode()" class="p-2.5 bg-white/10 hover:bg-white/20 text-amber-200 rounded-xl transition text-sm flex items-center justify-center cursor-pointer border border-white/10">
+                                <i id="themeIcon" class="fa-solid fa-moon text-sxc-gold"></i>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Auth Options -->
-                    <div class="flex items-center space-x-2.5 flex-wrap gap-y-2">
-                        <div id="userProfileBadge" class="flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl border border-white/20 text-xs">
-                            <img id="userAvatar" src="https://placehold.co/40x40/0F2C59/E5A93C?text=U" alt="" class="w-6 h-6 rounded-full border border-sxc-gold">
-                            <span id="userName" class="font-bold text-amber-200">Student</span>
-                            <button id="logout-btn" class="text-slate-300 hover:text-white ml-2 text-[10px] uppercase font-bold underline cursor-pointer">Logout</button>
-                        </div>
-
-                        <button onclick="toggleDarkMode()" class="p-2.5 bg-white/10 hover:bg-white/20 text-amber-200 rounded-xl transition text-sm flex items-center justify-center cursor-pointer border border-white/10">
-                            <i id="themeIcon" class="fa-solid fa-moon text-sxc-gold"></i>
+                    <!-- NAVIGATION TABS -->
+                    <nav class="flex space-x-2 border-t border-white/10 pt-2 pb-1 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
+                        <button id="tabBtnBrowse" onclick="switchTab('browse')" class="px-4 py-2 rounded-t-xl bg-white dark:bg-slate-900 text-sxc-navy dark:text-amber-300 flex items-center gap-2 cursor-pointer transition shadow-sm whitespace-nowrap">
+                            <i class="fa-solid fa-layer-group"></i> <span>Browse Materials</span>
+                            <span id="navCountBadge" class="bg-sxc-navy/10 text-sxc-navy dark:text-amber-300 font-black text-[10px] px-2 py-0.5 rounded-full">0</span>
                         </button>
-                    </div>
+                        
+                        <button id="tabBtnUpload" onclick="switchTab('upload')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> <span>Student Upload</span>
+                        </button>
+
+                        <button id="tabBtnSuggestions" onclick="switchTab('suggestions')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
+                            <i class="fa-solid fa-lightbulb text-sxc-gold"></i> <span>Ideas & Rating</span>
+                        </button>
+                        
+                        <button id="tabBtnAdmin" onclick="switchTab('admin')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
+                            <i class="fa-solid fa-user-shield text-sxc-gold"></i> <span>Admin Portal</span>
+                            <span id="pendingCountBadge" class="bg-red-500 text-white font-black text-[10px] px-1.5 py-0.2 rounded-full hidden">0</span>
+                        </button>
+                    </nav>
                 </div>
+            </header>
 
-                <!-- NAVIGATION TABS -->
-                <nav class="flex space-x-2 border-t border-white/10 pt-2 pb-1 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
-                    <button id="tabBtnBrowse" onclick="switchTab('browse')" class="px-4 py-2 rounded-t-xl bg-white dark:bg-slate-900 text-sxc-navy dark:text-amber-300 flex items-center gap-2 cursor-pointer transition shadow-sm whitespace-nowrap">
-                        <i class="fa-solid fa-layer-group"></i> <span>Browse Materials</span>
-                        <span id="navCountBadge" class="bg-sxc-navy/10 text-sxc-navy dark:text-amber-300 font-black text-[10px] px-2 py-0.5 rounded-full">0</span>
-                    </button>
-                    <button id="tabBtnUpload" onclick="switchTab('upload')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> <span>Student Upload</span>
-                    </button>
-                    <button id="tabBtnSuggestions" onclick="switchTab('suggestions')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
-                        <i class="fa-solid fa-lightbulb text-sxc-gold"></i> <span>Ideas & Rating</span>
-                    </button>
-                    <button id="tabBtnAdmin" onclick="switchTab('admin')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
-                        <i class="fa-solid fa-user-shield text-sxc-gold"></i> <span>Admin Portal</span>
-                        <span id="pendingCountBadge" class="bg-red-500 text-white font-black text-[10px] px-1.5 py-0.2 rounded-full hidden">0</span>
-                    </button>
-                </nav>
-            </div>
-        </header>
+            <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
-            <!-- TAB 1: BROWSE VERIFIED MATERIALS -->
-            <section id="viewBrowse" class="tab-view space-y-6 w-full">
-                <!-- Filters -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 sm:p-6 transition-colors">
-                    <div class="relative mb-4">
-                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                <!-- TAB 1: BROWSE VERIFIED MATERIALS -->
+                <section id="viewBrowse" class="tab-view space-y-6">
+                    <!-- Filters -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 sm:p-6 transition-colors">
+                        <div class="relative mb-4">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search by Subject, Course Code, Topic..." class="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium outline-none text-slate-800 dark:text-slate-100">
                         </div>
-                        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search by Subject, Course Code, Topic..." class="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium outline-none text-slate-800 dark:text-slate-100">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <select id="departmentFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium outline-none text-slate-800 dark:text-slate-200">
+                                    <option value="ALL">All Departments & Programs</option>
+                                    <optgroup label="UG Science Departments">
+                                        <option value="Biotechnology">Biotechnology</option>
+                                        <option value="Botany">Botany</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="Geology">Geology</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Life Science & Biochemistry">Life Science & Biochemistry</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Microbiology">Microbiology</option>
+                                        <option value="Physics">Physics</option>
+                                        <option value="Statistics">Statistics</option>
+                                        <option value="Zoology">Zoology</option>
+                                    </optgroup>
+                                    <optgroup label="UG Arts Departments">
+                                        <option value="Ancient Indian History, Culture & Archaeology">Ancient Indian History, Culture & Archaeology</option>
+                                        <option value="Economics">Economics</option>
+                                        <option value="Psychology">Psychology</option>
+                                        <option value="English">English</option>
+                                        <option value="French">French</option>
+                                        <option value="Hindi">Hindi</option>
+                                        <option value="History">History</option>
+                                        <option value="Political Science">Political Science</option>
+                                        <option value="Public Policy">Public Policy</option>
+                                        <option value="Sociology">Sociology</option>
+                                        <option value="Anthropology">Anthropology</option>
+                                        <option value="Mass Media">Mass Media</option>
+                                    </optgroup>
+                                    <optgroup label="Commerce Departments">
+                                        <option value="Commerce (General & Evening)">Commerce (General & Evening)</option>
+                                        <option value="Accounting & Finance (BAF)">Accounting & Finance (BAF)</option>
+                                        <option value="Management Studies (BMS)">Management Studies (BMS)</option>
+                                    </optgroup>
+                                    <optgroup label="Undergraduate (UG) Programs">
+                                        <option value="BA Stream">BA (Economics, Psychology, Political Science, History, Sociology, Anthropology, Mass Media, Languages)</option>
+                                        <option value="BSc Stream">BSc (Physics, Chemistry, Mathematics, IT, Biotechnology, Computational Biology, Statistics, Microbiology, Life Sciences, Geology, Zoology)</option>
+                                        <option value="BCom Stream">BCom (General, Accounting & Finance)</option>
+                                        <option value="BMS Program">BMS (Management Studies)</option>
+                                        <option value="BMM Program">BMM (Mass Media)</option>
+                                    </optgroup>
+                                    <optgroup label="Postgraduate (PG) - MA">
+                                        <option value="MA Economics">MA Economics</option>
+                                        <option value="MA Psychology">MA Psychology</option>
+                                        <option value="MA Public Policy">MA Public Policy</option>
+                                        <option value="MA Ancient Indian History">MA Ancient Indian History, Culture & Archaeology</option>
+                                    </optgroup>
+                                    <optgroup label="Postgraduate (PG) - MSc">
+                                        <option value="MSc Big Data Analytics">MSc Big Data Analytics</option>
+                                        <option value="MSc Biotechnology">MSc Biotechnology</option>
+                                        <option value="MSc Botany">MSc Botany</option>
+                                        <option value="MSc Geology">MSc Geology</option>
+                                        <option value="MSc Life Science">MSc Life Science</option>
+                                        <option value="MSc Microbiology">MSc Microbiology</option>
+                                        <option value="MSc Physics">MSc Physics</option>
+                                    </optgroup>
+                                    <optgroup label="PG Diplomas">
+                                        <option value="PG Diploma Clinical Research">Clinical Research</option>
+                                        <option value="PG Diploma Forensic Science">Forensic Science</option>
+                                        <option value="PG Diploma Environmental Forensics">Environmental Forensics</option>
+                                        <option value="PG Diploma Intellectual Property Rights">Intellectual Property Rights</option>
+                                        <option value="PG Diploma Counselling">Counselling</option>
+                                        <option value="PG Diploma Expressive Arts Therapy">Expressive Arts Therapy</option>
+                                        <option value="PG Diploma Gemmology">Gemmology</option>
+                                    </optgroup>
+                                    <optgroup label="Certificate & Diploma">
+                                        <option value="Certificate Forensic Science">Forensic Science</option>
+                                        <option value="Certificate Forensic Biology">Forensic Biology</option>
+                                        <option value="Certificate Personal Counselling">Personal Counselling</option>
+                                        <option value="Certificate Environmental Forensics">Environmental Forensics</option>
+                                        <option value="Certificate Bioinformatics">Bioinformatics (Hybrid Mode)</option>
+                                    </optgroup>
+                                    <optgroup label="Doctoral (PhD)">
+                                        <option value="PhD Arts">PhD Arts</option>
+                                        <option value="PhD Science">PhD Science</option>
+                                        <option value="PhD Commerce">PhD Commerce</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div>
+                                <select id="semesterFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium outline-none text-slate-800 dark:text-slate-200">
+                                    <option value="ALL">All Semesters / Years</option>
+                                    <option value="Sem 1">Semester 1</option>
+                                    <option value="Sem 2">Semester 2</option>
+                                    <option value="Sem 3">Semester 3</option>
+                                    <option value="Sem 4">Semester 4</option>
+                                    <option value="Sem 5">Semester 5</option>
+                                    <option value="Sem 6">Semester 6</option>
+                                    <option value="Postgraduate Year">Postgraduate Year</option>
+                                    <option value="Diploma / Certificate Term">Diploma / Certificate Term</option>
+                                    <option value="PhD / Research">PhD / Research</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select id="typeFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium outline-none text-slate-800 dark:text-slate-200">
+                                    <option value="ALL">All Types</option>
+                                    <option value="PYQ">End-Sem Question Papers (PYQ)</option>
+                                    <option value="KT PYQ">KT Exam Papers</option>
+                                    <option value="Syllabus">Official Syllabus Copy</option>
+                                    <option value="Notes">Lecture Notes / Solved Answers</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <select id="departmentFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium outline-none text-slate-800 dark:text-slate-200">
-                                <option value="ALL">All Departments & Programs</option>
-                                <option value="Information Technology">Information Technology</option>
-                                <option value="Economics">Economics</option>
-                            </select>
+                    <div id="emptyState" class="hidden text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <i class="fa-solid fa-folder-open text-5xl text-slate-300 dark:text-slate-700 mb-3"></i>
+                        <h3 class="font-bold text-slate-700 dark:text-slate-200 text-lg">No verified materials found</h3>
+                    </div>
+
+                    <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </section>
+
+                <!-- TAB 2: DIRECT STUDENT UPLOAD -->
+                <section id="viewUpload" class="tab-view hidden max-w-2xl mx-auto">
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                        <div class="sxc-gradient p-6 text-white gold-border">
+                            <h2 class="text-xl font-black flex items-center gap-2">
+                                <i class="fa-solid fa-file-arrow-up text-sxc-gold"></i> Open Student Contribution
+                            </h2>
+                            <p class="text-xs text-amber-200/90 mt-1">Upload PYQs, KT papers, or notes. Help build the ultimate open-source repository for Xavierites.</p>
                         </div>
-                        <div>
-                            <select id="semesterFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium outline-none text-slate-800 dark:text-slate-200">
-                                <option value="ALL">All Semesters / Years</option>
-                                <option value="Sem 2">Semester 2</option>
-                                <option value="Sem 3">Semester 3</option>
-                            </select>
+
+                        <form id="studentUploadForm" onsubmit="handleStudentUploadSubmit(event)" class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Document Title *</label>
+                                <input type="text" id="studUpTitle" required placeholder="e.g. Sem 3 KT Exam Paper - Database Management" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-sxc-navy">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Department/Program *</label>
+                                    <select id="studUpDept" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-sxc-navy">
+                                        <option value="">Select Department/Program</option>
+                                        <optgroup label="UG Science Departments">
+                                            <option value="Biotechnology">Biotechnology</option>
+                                            <option value="Botany">Botany</option>
+                                            <option value="Chemistry">Chemistry</option>
+                                            <option value="Geology">Geology</option>
+                                            <option value="Information Technology">Information Technology</option>
+                                            <option value="Life Science & Biochemistry">Life Science & Biochemistry</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Microbiology">Microbiology</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Statistics">Statistics</option>
+                                            <option value="Zoology">Zoology</option>
+                                        </optgroup>
+                                        <optgroup label="UG Arts Departments">
+                                            <option value="Ancient Indian History, Culture & Archaeology">Ancient Indian History, Culture & Archaeology</option>
+                                            <option value="Economics">Economics</option>
+                                            <option value="Psychology">Psychology</option>
+                                            <option value="English">English</option>
+                                            <option value="French">French</option>
+                                            <option value="Hindi">Hindi</option>
+                                            <option value="History">History</option>
+                                            <option value="Political Science">Political Science</option>
+                                            <option value="Public Policy">Public Policy</option>
+                                            <option value="Sociology">Sociology</option>
+                                            <option value="Anthropology">Anthropology</option>
+                                            <option value="Mass Media">Mass Media</option>
+                                        </optgroup>
+                                        <optgroup label="Commerce Departments">
+                                            <option value="Commerce (General & Evening)">Commerce (General & Evening)</option>
+                                            <option value="Accounting & Finance (BAF)">Accounting & Finance (BAF)</option>
+                                            <option value="Management Studies (BMS)">Management Studies (BMS)</option>
+                                        </optgroup>
+                                        <optgroup label="Undergraduate (UG) Programs">
+                                            <option value="BA Stream">BA (Economics, Psychology, Political Science, History, Sociology, Anthropology, Mass Media, Languages)</option>
+                                            <option value="BSc Stream">BSc (Physics, Chemistry, Mathematics, IT, Biotechnology, Computational Biology, Statistics, Microbiology, Life Sciences, Geology, Zoology)</option>
+                                            <option value="BCom Stream">BCom (General, Accounting & Finance)</option>
+                                            <option value="BMS Program">BMS (Management Studies)</option>
+                                            <option value="BMM Program">BMM (Mass Media)</option>
+                                        </optgroup>
+                                        <optgroup label="Postgraduate (PG) - MA">
+                                            <option value="MA Economics">MA Economics</option>
+                                            <option value="MA Psychology">MA Psychology</option>
+                                            <option value="MA Public Policy">MA Public Policy</option>
+                                            <option value="MA Ancient Indian History">MA Ancient Indian History, Culture & Archaeology</option>
+                                        </optgroup>
+                                        <optgroup label="Postgraduate (PG) - MSc">
+                                            <option value="MSc Big Data Analytics">MSc Big Data Analytics</option>
+                                            <option value="MSc Biotechnology">MSc Biotechnology</option>
+                                            <option value="MSc Botany">MSc Botany</option>
+                                            <option value="MSc Geology">MSc Geology</option>
+                                            <option value="MSc Life Science">MSc Life Science</option>
+                                            <option value="MSc Microbiology">MSc Microbiology</option>
+                                            <option value="MSc Physics">MSc Physics</option>
+                                        </optgroup>
+                                        <optgroup label="PG Diplomas">
+                                            <option value="PG Diploma Clinical Research">Clinical Research</option>
+                                            <option value="PG Diploma Forensic Science">Forensic Science</option>
+                                            <option value="PG Diploma Environmental Forensics">Environmental Forensics</option>
+                                            <option value="PG Diploma Intellectual Property Rights">Intellectual Property Rights</option>
+                                            <option value="PG Diploma Counselling">Counselling</option>
+                                            <option value="PG Diploma Expressive Arts Therapy">Expressive Arts Therapy</option>
+                                            <option value="PG Diploma Gemmology">Gemmology</option>
+                                        </optgroup>
+                                        <optgroup label="Certificate & Diploma">
+                                            <option value="Certificate Forensic Science">Forensic Science</option>
+                                            <option value="Certificate Forensic Biology">Forensic Biology</option>
+                                            <option value="Certificate Personal Counselling">Personal Counselling</option>
+                                            <option value="Certificate Environmental Forensics">Environmental Forensics</option>
+                                            <option value="Certificate Bioinformatics">Bioinformatics (Hybrid Mode)</option>
+                                        </optgroup>
+                                        <optgroup label="Doctoral (PhD)">
+                                            <option value="PhD Arts">PhD Arts</option>
+                                            <option value="PhD Science">PhD Science</option>
+                                            <option value="PhD Commerce">PhD Commerce</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Semester/Year *</label>
+                                    <select id="studUpSem" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-sxc-navy">
+                                        <option value="">Select Semester</option>
+                                        <option value="Sem 1">Semester 1</option>
+                                        <option value="Sem 2">Semester 2</option>
+                                        <option value="Sem 3">Semester 3</option>
+                                        <option value="Sem 4">Semester 4</option>
+                                        <option value="Sem 5">Semester 5</option>
+                                        <option value="Sem 6">Semester 6</option>
+                                        <option value="Postgraduate Year">Postgraduate Year</option>
+                                        <option value="Diploma / Certificate Term">Diploma / Certificate Term</option>
+                                        <option value="PhD / Research">PhD / Research</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Subject Name *</label>
+                                    <input type="text" id="studUpSubject" required placeholder="e.g. Data Structures" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-sxc-navy">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Resource Type *</label>
+                                    <select id="studUpType" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-sxc-navy">
+                                        <option value="PYQ">End-Sem PYQ</option>
+                                        <option value="KT PYQ">KT Paper</option>
+                                        <option value="Notes">Study Notes</option>
+                                        <option value="Syllabus">Syllabus</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Google Drive or PDF URL *</label>
+                                <div class="mb-2 p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 rounded-xl text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2 shadow-sm">
+                                    <i class="fa-solid fa-circle-info text-amber-600 dark:text-amber-400 mt-0.5 text-base flex-shrink-0"></i>
+                                    <span><strong>Open Source Sharing:</strong> Please ensure your Google Drive link sharing is set to <strong class="underline font-black">"Anyone with the link can view"</strong> so fellow Xavierites can open and study it without permission prompts!</span>
+                                </div>
+                                <input type="url" id="studUpUrl" required placeholder="https://drive.google.com/file/d/..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-sxc-navy">
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="w-full py-3 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                                    <i class="fa-solid fa-cloud-arrow-up text-sxc-gold"></i>
+                                    <span>Submit Material</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- TAB 3: IDEAS & RATINGS -->
+                <section id="viewSuggestions" class="tab-view hidden max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+                        <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 mb-4">Portal Feedback & Ideas</h2>
+                        <form onsubmit="handleSuggestionSubmit(event)" class="space-y-4">
+                            <textarea id="sugText" required rows="3" placeholder="What features or notes do you need?" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm outline-none text-slate-800 dark:text-slate-100"></textarea>
+                            <button type="submit" class="px-5 py-2.5 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl text-xs transition shadow cursor-pointer">Submit Idea</button>
+                        </form>
+                        <div id="suggestionsList" class="mt-6 space-y-4"></div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: ADMIN DASHBOARD -->
+                <section id="viewAdmin" class="tab-view hidden max-w-5xl mx-auto space-y-6">
+                    <!-- Admin Login -->
+                    <div id="adminLoginGate" class="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 text-center mt-10">
+                        <i class="fa-solid fa-lock text-3xl text-sxc-navy dark:text-amber-300 mb-4"></i>
+                        <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 mb-4">Admin Dashboard</h2>
+                        <form onsubmit="verifyAdmin(event)">
+                            <input type="password" id="adminPasscode" placeholder="Enter PIN (sxc123)" class="w-full text-center px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl mb-4 outline-none text-slate-800 dark:text-slate-100 font-mono">
+                            <button type="submit" class="w-full py-3 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow-lg transition cursor-pointer">Unlock Dashboard</button>
+                        </form>
+                    </div>
+
+                    <div id="adminDashboard" class="hidden space-y-8">
+                        <!-- Pending Submissions -->
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <h3 class="text-lg font-black text-slate-800 dark:text-slate-100 mb-4">Pending Student Submissions</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-50 dark:bg-slate-800 text-[10px] uppercase font-black text-slate-500 dark:text-slate-400">
+                                            <th class="p-3">Title & Detail</th>
+                                            <th class="p-3">Type</th>
+                                            <th class="p-3 text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingTableList" class="text-sm text-slate-700 dark:text-slate-300"></tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div>
-                            <select id="typeFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium outline-none text-slate-800 dark:text-slate-200">
-                                <option value="ALL">All Types</option>
-                                <option value="PYQ">End-Sem Question Papers (PYQ)</option>
-                                <option value="Notes">Lecture Notes / Solved Answers</option>
-                            </select>
+
+                        <!-- Live Database Management -->
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <h3 class="text-lg font-black text-slate-800 dark:text-slate-100 mb-4">Manage Live Database</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-50 dark:bg-slate-800 text-[10px] uppercase font-black text-slate-500 dark:text-slate-400">
+                                            <th class="p-3">Resource Title</th>
+                                            <th class="p-3">Department</th>
+                                            <th class="p-3 text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminDataList" class="text-sm text-slate-700 dark:text-slate-300"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+            </main>
+        </div>
 
-                <div id="emptyState" class="hidden text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                    <i class="fa-solid fa-folder-open text-5xl text-slate-300 dark:text-slate-700 mb-3"></i>
-                    <h3 class="font-bold text-slate-700 dark:text-slate-200 text-lg">No verified materials found</h3>
-                </div>
-
-                <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-            </section>
-
-            <!-- TAB 2: DIRECT STUDENT UPLOAD -->
-            <section id="viewUpload" class="tab-view hidden max-w-2xl mx-auto">
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-                    <div class="sxc-gradient p-6 text-white gold-border">
-                        <h2 class="text-xl font-black flex items-center gap-2">
-                            <i class="fa-solid fa-file-arrow-up text-sxc-gold"></i> Open Student Contribution
-                        </h2>
-                    </div>
-                    <form id="studentUploadForm" onsubmit="handleStudentUploadSubmit(event)" class="p-6 space-y-4">
-                        <input type="text" id="studUpTitle" required placeholder="Document Title" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm outline-none text-slate-800 dark:text-slate-100">
-                        <input type="url" id="studUpUrl" required placeholder="Google Drive URL" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm outline-none text-slate-800 dark:text-slate-100">
-                        <button type="submit" class="w-full py-3 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow-lg transition">Submit Material</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- TAB 3: IDEAS & RATINGS -->
-            <section id="viewSuggestions" class="tab-view hidden max-w-4xl mx-auto space-y-6">
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
-                    <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 mb-4">Portal Feedback</h2>
-                    <form onsubmit="handleSuggestionSubmit(event)" class="space-y-4">
-                        <textarea id="sugText" required rows="3" placeholder="What features or notes do you need?" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm outline-none text-slate-800 dark:text-slate-100"></textarea>
-                        <button type="submit" class="px-5 py-2.5 bg-sxc-navy text-white font-extrabold rounded-xl text-xs">Submit Idea</button>
-                    </form>
-                    <div id="suggestionsList" class="mt-6 space-y-4"></div>
-                </div>
-            </section>
-
-            <!-- TAB 4: ADMIN DASHBOARD -->
-            <section id="viewAdmin" class="tab-view hidden max-w-5xl mx-auto space-y-6">
-                <div id="adminLoginGate" class="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-2xl p-8 text-center mt-10 shadow-xl border">
-                    <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 mb-4">Admin Dashboard</h2>
-                    <form onsubmit="verifyAdmin(event)">
-                        <input type="password" id="adminPasscode" placeholder="Enter PIN" class="w-full text-center px-4 py-3 bg-slate-50 dark:bg-slate-800 border rounded-xl mb-4 text-slate-800 dark:text-slate-100">
-                        <button type="submit" class="w-full py-3 bg-sxc-navy text-white font-extrabold rounded-xl shadow-lg">Unlock Dashboard</button>
-                    </form>
-                </div>
-                <div id="adminDashboard" class="hidden space-y-8">
-                    <!-- Dashboard tables generated via script -->
-                    <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-xl"><h3 class="font-black text-slate-800 dark:text-white mb-4">Manage Pending</h3><table class="w-full"><tbody id="pendingTableList"></tbody></table></div>
-                    <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-xl"><h3 class="font-black text-slate-800 dark:text-white mb-4">Manage Live Database</h3><table class="w-full"><tbody id="adminDataList"></tbody></table></div>
-                </div>
-            </section>
-        </main>
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed bottom-5 right-5 bg-sxc-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 border-l-4 border-sxc-gold">
+            <i class="fa-solid fa-circle-check text-sxc-gold text-lg"></i>
+            <span id="toastMsg" class="text-sm font-semibold">Message</span>
+        </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-sxc-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 border-l-4 border-sxc-gold">
-        <i class="fa-solid fa-circle-check text-sxc-gold text-lg"></i>
-        <span id="toastMsg" class="text-sm font-semibold">Message</span>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 3. UNIFIED FIREBASE & LOGIC SCRIPT         -->
-    <!-- ========================================== -->
+    <!-- FIREBASE AND CORE LOGIC SCRIPT -->
     <script type="module">
+        // Firebase Static Imports (Clean & Safe)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-       import { 
-            getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,
-            GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, getDocs, addDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Global Variables
+        let resources = [];
+        let pendingResources = [];
+        let suggestions = [];
+        let currentUser = null;
+        window.sxcDB = null;
+        window.useCloudDB = false;
 
         const firebaseConfig = {
             apiKey: "AIzaSyDK0c-wCRI8F4sA_4kSCu8G6l67LEPpCYI",
@@ -266,37 +533,128 @@
             projectId: "sxc-mumbai-portal",
             storageBucket: "sxc-mumbai-portal.firebasestorage.app",
             messagingSenderId: "1070155779544",
-            appId: "1:1070155779544:web:e9b55883f81689b8ee76ad"
+            appId: "1:1070155779544:web:97bac9697f9ec766ee76ad"
         };
 
-        // Initialize Firebase ONLY ONCE
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        window.sxcDB = getFirestore(app);
-        window.useCloudDB = true;
-
-        // UI Auth Elements
-        const authContainer = document.getElementById('auth-container');
-        const protectedWebsite = document.getElementById('protected-website');
-        const errorText = document.getElementById('error-message');
-
-        const showError = (msg) => { errorText.textContent = msg; errorText.classList.remove('hidden'); };
-        
-        window.showToast = function(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
-        }
-
-        // Global DB Variables
-        let resources = JSON.parse(localStorage.getItem('sxc_res')) || [
+        const starterData = [
             { id: 'res-init-1', title: 'Sem 3 Data Structures End-Sem PYQ (2023)', department: 'Information Technology', semester: 'Sem 3', subject: 'Data Structures', type: 'PYQ', fileUrl: 'https://drive.google.com/', contributor: 'Faculty Admin', date: '2025-10-12' },
             { id: 'res-init-2', title: 'Macroeconomics Unit 1-4 Notes & Solved Papers', department: 'Economics', semester: 'Sem 2', subject: 'Economics', type: 'Notes', fileUrl: 'https://drive.google.com/', contributor: 'Topper Batch', date: '2025-10-15' }
         ];
-        let pendingResources = JSON.parse(localStorage.getItem('sxc_pend')) || [];
-        let suggestions = JSON.parse(localStorage.getItem('sxc_sug')) || [];
-        let currentUser = null;
+
+        // Initialize Firebase Apps
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        try {
+            window.sxcDB = getFirestore(app);
+            window.useCloudDB = true;
+            const badge = document.getElementById('dbStatusBadge');
+            badge.innerText = "Cloud DB Live (Firebase)";
+            badge.className = "bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm";
+        } catch (e) {
+            console.warn("Could not connect to Firebase Firestore. Running locally.", e);
+            window.useCloudDB = false;
+        }
+
+        // ==========================================
+        // AUTHENTICATION LOGIC (New Feature)
+        // ==========================================
+        const errorText = document.getElementById('error-message');
+        const showError = (msg) => { errorText.textContent = msg; errorText.classList.remove('hidden'); };
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = { name: user.displayName || user.email.split('@')[0] };
+                document.getElementById('auth-container').classList.add('hidden');
+                document.getElementById('protected-website').classList.remove('hidden');
+                document.body.classList.remove('items-center', 'justify-center');
+                
+                document.getElementById('userName').innerText = currentUser.name;
+                await loadData();
+                renderResources();
+                renderSuggestions();
+            } else {
+                currentUser = null;
+                document.getElementById('auth-container').classList.remove('hidden');
+                document.getElementById('protected-website').classList.add('hidden');
+                document.body.classList.add('items-center', 'justify-center');
+            }
+        });
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value)
+                .catch(error => showError(error.message));
+        });
+
+        document.getElementById('signup-btn').addEventListener('click', () => {
+            createUserWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value)
+                .catch(error => showError(error.message));
+        });
+
+        document.getElementById('google-btn').addEventListener('click', () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider).catch(error => showError(error.message));
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
+
+        // Forgot Password Logic (Your precise request)
+        document.getElementById('forgot-btn').addEventListener('click', () => {
+            const emailValue = document.getElementById('email').value;
+            if (!emailValue) {
+                showError("Please enter your email address first to reset password.");
+                return;
+            }
+            sendPasswordResetEmail(auth, emailValue)
+                .then(() => {
+                    window.showToast("Password reset link sent to your email!");
+                    errorText.classList.add('hidden');
+                })
+                .catch(error => showError(error.message));
+        });
+
+        // ==========================================
+        // DATABASE & ADMIN LOGIC (Unchanged)
+        // ==========================================
+        async function loadData() {
+            let localRes = JSON.parse(localStorage.getItem('sxc_res')) || starterData;
+            pendingResources = JSON.parse(localStorage.getItem('sxc_pend')) || [];
+            suggestions = JSON.parse(localStorage.getItem('sxc_sug')) || [];
+
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const resSnap = await getDocs(collection(window.sxcDB, "resources"));
+                    if (!resSnap.empty) {
+                        let cloudRes = [];
+                        resSnap.forEach(d => cloudRes.push({ id: d.id, ...d.data() }));
+                        cloudRes.forEach(cr => {
+                            if (!localRes.find(lr => lr.id === cr.id)) localRes.push(cr);
+                        });
+                    }
+
+                    const pendSnap = await getDocs(collection(window.sxcDB, "pending_resources"));
+                    if (!pendSnap.empty) {
+                        pendSnap.forEach(d => {
+                            const item = { id: d.id, ...d.data() };
+                            if (!pendingResources.find(p => p.id === item.id)) pendingResources.push(item);
+                        });
+                    }
+
+                    const sugSnap = await getDocs(collection(window.sxcDB, "suggestions"));
+                    if (!sugSnap.empty) {
+                        sugSnap.forEach(d => {
+                            const item = { id: d.id, ...d.data() };
+                            if (!suggestions.find(s => s.id === item.id)) suggestions.push(item);
+                        });
+                    }
+                } catch (e) { 
+                    console.warn("Firestore fetch warning. Using local cache.", e); 
+                }
+            }
+            
+            resources = localRes;
+            saveDataLocally();
+        }
 
         function saveDataLocally() {
             localStorage.setItem('sxc_res', JSON.stringify(resources));
@@ -304,121 +662,229 @@
             localStorage.setItem('sxc_sug', JSON.stringify(suggestions));
         }
 
-        // 1. Authentication State Observer
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUser = user;
-                authContainer.classList.add('hidden');
-                protectedWebsite.classList.remove('hidden');
-                document.body.classList.remove('items-center', 'justify-center');
-                
-                // Display Name
-                const displayName = user.displayName || user.email || "Student";
-                document.getElementById('userName').innerText = displayName;
-                
-                // Load data after successful login
-                loadDataFromCloud();
-            } else {
-                currentUser = null;
-                authContainer.classList.remove('hidden');
-                protectedWebsite.classList.add('hidden');
-                document.body.classList.add('items-center', 'justify-center');
-            }
-        });
-
-        // Auth Listeners
-        document.getElementById('signup-btn').addEventListener('click', () => {
-            createUserWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value)
-                .catch(error => showError(error.message));
-        });
-        document.getElementById('login-btn').addEventListener('click', () => {
-            signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value)
-                .catch(error => showError(error.message));
-        });
-        document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
-
-        document.getElementById('google-btn').addEventListener('click', () => {
-            const provider = new GoogleAuthProvider();
-            signInWithPopup(auth, provider).catch(error => showError(error.message));
-        });
-
-        // Forgot Password Logic
-        document.getElementById('forgot-btn').addEventListener('click', () => {
-            const emailValue = document.getElementById('email').value;
-            if (!emailValue) {
-                showError("Please enter your email address first.");
-                return;
-            }
-            sendPasswordResetEmail(auth, emailValue)
-                .then(() => {
-                    window.showToast("Password reset email sent!");
-                    errorText.classList.add('hidden');
-                })
-                .catch(error => showError(error.message));
-        });
-
-        // 2. Database & UI Logic (Wrapped in functions)
-        async function loadDataFromCloud() {
-            if (window.useCloudDB && window.sxcDB) {
-                try {
-                    const resSnap = await getDocs(collection(window.sxcDB, "resources"));
-                    if (!resSnap.empty) {
-                        resources = []; // This line permanently stops the duplication
-                        resSnap.forEach(d => {
-                            resources.push({ id: d.id, ...d.data() });
-                        });
-                    }
-                    saveDataLocally();
-                } catch (e) { console.warn("Cloud DB skipped, using local", e); }
-            }
-            renderResources();
-            renderSuggestions();
+        window.showToast = function(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
         }
 
-        // Exposing portal functions to window for inline onclick HTML handlers
         window.switchTab = function(tab) {
             document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
             document.getElementById('view' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('hidden');
         }
 
-        window.toggleDarkMode = function() { document.documentElement.classList.toggle('dark'); }
-        window.applyFilters = function() { renderResources(); }
-        
+        window.handleStudentUploadSubmit = async function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-sxc-gold"></i> <span>Saving...</span>';
+            btn.disabled = true;
+
+            const newRes = {
+                id: 'res-' + Date.now(),
+                title: document.getElementById('studUpTitle').value.trim(),
+                department: document.getElementById('studUpDept').value,
+                semester: document.getElementById('studUpSem').value,
+                subject: document.getElementById('studUpSubject').value.trim(),
+                type: document.getElementById('studUpType').value,
+                fileUrl: document.getElementById('studUpUrl').value.trim(),
+                contributor: currentUser ? currentUser.name : "Student Contributor",
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            pendingResources.unshift(newRes);
+            saveDataLocally();
+
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    await addDoc(collection(window.sxcDB, "pending_resources"), newRes);
+                } catch (err) { console.warn("Cloud write warning. Stored locally.", err); }
+            }
+            
+            window.showToast("✅ Successfully Submitted for Admin Review!");
+            document.getElementById('studentUploadForm').reset();
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            window.switchTab('browse');
+            
+            if (!document.getElementById('adminDashboard').classList.contains('hidden')) {
+                renderAdminTables();
+            }
+        }
+
+        window.handleSuggestionSubmit = async function(e) {
+            e.preventDefault();
+            const textInput = document.getElementById('sugText');
+            const text = textInput.value.trim();
+            if(!text) return;
+            
+            const newSug = {
+                id: 'sug-' + Date.now(),
+                text: text,
+                author: currentUser ? currentUser.name : "Anonymous Student",
+                adminReply: "",
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            suggestions.unshift(newSug);
+            saveDataLocally();
+
+            if (window.useCloudDB && window.sxcDB) {
+                try { await addDoc(collection(window.sxcDB, "suggestions"), newSug); } 
+                catch(e) { console.warn(e); }
+            }
+
+            textInput.value = '';
+            renderSuggestions();
+            window.showToast("💡 Idea submitted successfully!");
+        }
+
+        window.verifyAdmin = function(e) {
+            e.preventDefault();
+            if (document.getElementById('adminPasscode').value === 'Nasxczim9899') {
+                document.getElementById('adminLoginGate').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                renderAdminTables();
+                window.showToast("Admin Dashboard Unlocked");
+            } else {
+                window.showToast("Incorrect Admin PIN.");
+            }
+        }
+
+        window.renderAdminTables = function() {
+            const pendTbody = document.getElementById('pendingTableList');
+            document.getElementById('pendingCountBadge').innerText = pendingResources.length;
+            document.getElementById('pendingCountBadge').classList.toggle('hidden', pendingResources.length === 0);
+
+            pendTbody.innerHTML = pendingResources.length === 0 ? `<tr><td colspan="3" class="p-4 text-center text-slate-400">No pending submissions.</td></tr>` : pendingResources.map((r, i) => `
+                <tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                    <td class="p-3">
+                        <div class="font-bold text-slate-800 dark:text-slate-100">${r.title}</div>
+                        <div class="text-xs text-slate-500">${r.department} &bull; ${r.semester} &bull; ${r.subject}</div>
+                        <a href="${r.fileUrl}" target="_blank" class="text-xs text-blue-500 hover:underline"><i class="fa-solid fa-external-link-alt mr-1"></i>View Material Link</a>
+                    </td>
+                    <td class="p-3 text-xs font-bold text-sxc-navy dark:text-amber-300">${r.type}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="approvePending('${r.id}', ${i})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs mr-2 transition shadow-sm cursor-pointer">Approve</button>
+                        <button onclick="rejectPending('${r.id}', ${i})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs transition shadow-sm cursor-pointer">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            document.getElementById('adminDataList').innerHTML = resources.length === 0 ? `<tr><td colspan="3" class="p-4 text-center text-slate-400">No live resources.</td></tr>` : resources.map((r, idx) => `
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <td class="p-3 font-bold text-slate-800 dark:text-slate-100">${r.title}<div class="text-xs text-slate-400">${r.department}</div></td>
+                    <td class="p-3 text-xs text-slate-500">${r.type}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="deleteLiveResource('${r.id}', ${idx})" class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.approvePending = async function(id, index) {
+            const item = pendingResources.splice(index, 1)[0];
+            resources.unshift(item);
+            saveDataLocally();
+            
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    await addDoc(collection(window.sxcDB, "resources"), item);
+                    const q = query(collection(window.sxcDB, "pending_resources"), where("id", "==", id));
+                    const snap = await getDocs(q);
+                    snap.forEach(async (d) => await deleteDoc(d.ref));
+                } catch(e) { console.warn(e); }
+            }
+            renderAdminTables();
+            renderResources();
+            window.showToast("✅ Published Live to Portal!");
+        }
+
+        window.rejectPending = async function(id, index) {
+            pendingResources.splice(index, 1);
+            saveDataLocally();
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const q = query(collection(window.sxcDB, "pending_resources"), where("id", "==", id));
+                    const snap = await getDocs(q);
+                    snap.forEach(async (d) => await deleteDoc(d.ref));
+                } catch(e) { console.warn(e); }
+            }
+            renderAdminTables();
+            window.showToast("🗑️ Deleted submission.");
+        }
+
+        window.deleteLiveResource = async function(id, index) {
+            resources.splice(index, 1);
+            saveDataLocally();
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const q = query(collection(window.sxcDB, "resources"), where("id", "==", id));
+                    const snap = await getDocs(q);
+                    snap.forEach(async (d) => await deleteDoc(d.ref));
+                } catch(e) { console.warn(e); }
+            }
+            renderAdminTables();
+            renderResources();
+            window.showToast("🗑️ Deleted from live portal.");
+        }
+
+        window.renderSuggestions = function() {
+            const list = document.getElementById('suggestionsList');
+            if (!list) return;
+            list.innerHTML = suggestions.length === 0 ? '<p class="text-sm text-slate-400">No suggestions yet. Be the first to share an idea!</p>' : suggestions.map(s => `
+                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+                    <div class="flex justify-between items-center text-xs text-slate-500 font-bold">
+                        <span>${s.author} &bull; ${s.date}</span>
+                    </div>
+                    <p class="text-sm text-slate-800 dark:text-slate-100 font-medium">${s.text}</p>
+                    ${s.adminReply ? `<div class="mt-2 pl-3 border-l-2 border-sxc-gold text-xs text-amber-700 dark:text-amber-300 font-semibold bg-sxc-gold/10 p-2 rounded-r-lg"><strong>Admin Response:</strong> ${s.adminReply}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
         window.renderResources = function() {
             const grid = document.getElementById('resourceGrid');
+            if(!grid) return;
             const term = document.getElementById('searchInput').value.toLowerCase();
-            
-            const filtered = resources.filter(r => r.title.toLowerCase().includes(term));
+            const dept = document.getElementById('departmentFilter').value;
+            const sem = document.getElementById('semesterFilter').value;
+            const type = document.getElementById('typeFilter').value;
+
+            const filtered = resources.filter(r => {
+                const matchTerm = r.title.toLowerCase().includes(term) || (r.subject && r.subject.toLowerCase().includes(term));
+                const matchDept = dept === 'ALL' || r.department === dept;
+                const matchSem = sem === 'ALL' || r.semester === sem;
+                const matchType = type === 'ALL' || r.type === type;
+                return matchTerm && matchDept && matchSem && matchType;
+            });
+
             document.getElementById('navCountBadge').innerText = filtered.length;
             
             if (filtered.length === 0) {
                 document.getElementById('emptyState').classList.remove('hidden');
                 grid.innerHTML = ''; return;
             }
-            document.getElementById('emptyState').classList.add('hidden');
             
+            document.getElementById('emptyState').classList.add('hidden');
             grid.innerHTML = filtered.map(item => `
-                <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
-                    <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">${item.type}</span>
-                    <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base mt-2">${item.title}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${item.department} • ${item.semester}</p>
-                    <a href="${item.fileUrl}" target="_blank" class="mt-4 flex items-center justify-center gap-2 w-full px-3 py-2 bg-sxc-navy text-white text-xs font-bold rounded-lg transition">View Material</a>
+                <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30">${item.type}</span>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base mt-2 leading-tight">${item.title}</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium">${item.department} &bull; ${item.semester}</p>
+                        <p class="text-xs text-sxc-navy dark:text-amber-300 font-bold mt-1">Subject: ${item.subject || 'General'}</p>
+                    </div>
+                    <a href="${item.fileUrl}" target="_blank" class="mt-4 flex items-center justify-center gap-2 w-full px-3 py-2 bg-sxc-navy hover:bg-sxc-navyLight text-white text-xs font-bold rounded-lg shadow-sm transition">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-sxc-gold"></i> Open PDF Material
+                    </a>
                 </div>
             `).join('');
         }
 
-        // Admin & Form Submissions
-        window.verifyAdmin = function(e) {
-            e.preventDefault();
-            if (document.getElementById('adminPasscode').value === 'Nasxczim9899') {
-                document.getElementById('adminLoginGate').classList.add('hidden');
-                document.getElementById('adminDashboard').classList.remove('hidden');
-                window.showToast("Admin Unlocked");
-            }
-        }
-        
-        window.handleSuggestionSubmit = function(e) { e.preventDefault(); window.showToast("Feedback sent!"); }
-        window.handleStudentUploadSubmit = function(e) { e.preventDefault(); window.showToast("Material Submitted!"); }
+        window.applyFilters = function() { renderResources(); }
+        window.toggleDarkMode = function() { document.documentElement.classList.toggle('dark'); }
     </script>
 </body>
 </html>
